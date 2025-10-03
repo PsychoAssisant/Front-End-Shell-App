@@ -11,6 +11,9 @@ export default function Home() {
   const [history, setHistory] = useState<ChatMessage[]>([]);
 
   const handleSendPrompt = (prompt: string) => {
+    if (isLoading) {
+      return;
+    }
     setIsLoading(true);
 
     const userMessage: ChatMessage = {
