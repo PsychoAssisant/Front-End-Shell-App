@@ -33,12 +33,12 @@ export default function Home() {
     }, 1500);
   };
   return (
-    <main className="flex flex-col min-h-screen items-center p-4 bg-gray-50">
-      <h1 className="text-3xl font-bold mb-8">PsychoAssistant</h1>
-      <div className="flex-grow w-full max-w-lg bg-white shadow-inner overflow-hidden border-x border-t">
+    <main>
+      <h1>PsychoAssistant</h1>
+      <div>
         <ChatHistory messages={history}>{}</ChatHistory>
       </div>
-      <div className="w-full max-w-lg shadow-lg border-x border-b">
+      <div>
         <PromptInput
           onSend={handleSendPrompt}
           isDisabled={isLoading}
