@@ -9,7 +9,15 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        body: "#111827",
+        assistant: "#1F2937",
+        user: "#6D28D9",
+        accent: "#A855F7",
+        "text-default": "#F9FAFB",
+      },
+    },
     plugins: [],
   },
 };
