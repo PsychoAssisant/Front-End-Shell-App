@@ -63,14 +63,14 @@ export default function Home() {
       <div className="grow w-full max-w-xl mx-auto overflow-y-auto">
         <ChatHistory messages={history}>{}</ChatHistory>
       </div>
-      <div className="flex items-center w-full max-w-xl mx-auto border border-gray-100 shadow-2xl p-4 rounded-2xl m-4">
+      <div className="flex items-centerw-full max-w-xl mx-auto border border-gray-100 shadow-2xl p-4 rounded-2xl m-4">
         <PromptInput
           onSend={handleSendPrompt}
           isDisabled={isLoading}
         ></PromptInput>
       </div>
       <div className="m-2">
-        <p>PsychoAssistant can make mistakes. Please verify it's answers. </p>
+        <p>PsychoAssistant can make mistakes. Please verify its answers. </p>
       </div>
     </main>
   );
