@@ -11,40 +11,33 @@ export default function Home() {
   const [history, setHistory] = useState<ChatMessage[]>([]);
 
   const handleSendPrompt = async (prompt: string) => {
-    if (isLoading) return; // Zabezpieczenie przed podwójnym wysłaniem
-
+    if (isLoading) return;
     setIsLoading(true);
 
-    // 1. Dodaj wiadomość użytkownika do historii (natychmiast)
     const userMessage: ChatMessage = {
       id: uuidv4(),
       role: "user",
       content: prompt,
     };
-    // Używamy funkcji aktualizującej stan (prev), aby zawsze bazować na najnowszej historii
+
     setHistory((prev) => [...prev, userMessage]);
 
     try {
-      // 2. WYSŁANIE ZAPYTANIA DO ROUTE HANDLERA (/api/chat)
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }), // Wysyłamy prompt
+        body: JSON.stringify({ prompt }),
       });
 
-      // 3. Sprawdź, czy serwer odpowiedział poprawnie (status 2xx)
       if (!response.ok) {
-        // Jeśli jest błąd, pobierz JSON z błędem z Route Handlera
         const errorData = await response.json();
-        // Rzucamy błąd, aby przejść do bloku catch
+
         throw new Error(errorData.error || `Błąd HTTP: ${response.status}`);
       }
 
-      // 4. Pobierz dane z backendu (zawierające message)
       const data = await response.json();
-      const aiResponseText = data.message; // Zakładamy, że Route Handler zwraca pole 'message'
+      const aiResponseText = data.message;
 
-      // 5. Dodaj odpowiedź asystenta do historii
       const aiMessage: ChatMessage = {
         id: uuidv4(),
         role: "assistant",
@@ -61,21 +54,23 @@ export default function Home() {
         } as ChatMessage,
       ]);
     } finally {
-      // 6. Zwalniamy blokadę formularza po zakończeniu operacji
       setIsLoading(false);
     }
   };
   return (
-    <main>
-      <h1 className="text-4xl flex flex-row">PsychoAssistant</h1>
-      <div>
+    <main className="flex flex-col h-screen max-h-screen items-center">
+      <h1 className="text-4xl font-bold py-4">PsychoAssistant</h1>
+      <div className="grow w-full max-w-xl mx-auto overflow-y-auto">
         <ChatHistory messages={history}>{}</ChatHistory>
       </div>
-      <div>
+      <div className="flex items-center w-full max-w-xl mx-auto border border-gray-100 shadow-2xl p-4 rounded-2xl m-4">
         <PromptInput
           onSend={handleSendPrompt}
           isDisabled={isLoading}
         ></PromptInput>
+      </div>
+      <div className="m-2">
+        <p>PsychoAssistant can make mistakes. Please verify it's answers. </p>
       </div>
     </main>
   );
