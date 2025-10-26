@@ -1,10 +1,10 @@
 "use client";
 
-import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import { ChatMessage } from "./types/chat";
 import PromptInput from "./components/PromptInput";
 import ChatHistory from "./components/ChatHistory";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
@@ -52,8 +52,6 @@ export default function Home() {
       };
       setHistory((prev) => [...prev, aiMessage]);
     } catch (error) {
-      console.error("Błąd komunikacji z backendem:", error);
-      // Opcjonalnie: Dodaj wiadomość o błędzie systemowym do historii czatu
       setHistory((prev) => [
         ...prev,
         {
@@ -69,7 +67,7 @@ export default function Home() {
   };
   return (
     <main>
-      <h1>PsychoAssistant</h1>
+      <h1 className="text-4xl flex flex-row">PsychoAssistant</h1>
       <div>
         <ChatHistory messages={history}>{}</ChatHistory>
       </div>

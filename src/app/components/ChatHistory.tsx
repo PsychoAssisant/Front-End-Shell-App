@@ -17,7 +17,7 @@ const ChatHistory: React.FC<ChatHistoryProps> = ({ messages }) => {
   return (
     <div>
       {messages.map((message) => (
-        <div key="message.id" className={` ${getMessageStyles(message.role)}`}>
+        <div key={message.id} className={` ${getMessageStyles(message.role)}`}>
           <p>{message.content}</p>
         </div>
       ))}
