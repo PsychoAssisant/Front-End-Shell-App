@@ -18,7 +18,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const LOCAL_BACKEND_ENDPOINT = "http://127.0.0.1:3001/v1/get_response";
+    const LOCAL_BACKEND_ENDPOINT = "http://api:3001/v1/get_response";
 
     console.log(
       "--- KROK 3: Wysyłanie żądania do FastAPI na: " + LOCAL_BACKEND_ENDPOINT
