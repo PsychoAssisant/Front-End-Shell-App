@@ -42,7 +42,7 @@ export async function POST(request: Request) {
 
     const data = await response.json();
 
-    const aiResponseText = data.received_data;
+    const aiResponseText = data.bot_answer;
     return NextResponse.json({ message: aiResponseText });
   } catch (error) {
     console.error(
